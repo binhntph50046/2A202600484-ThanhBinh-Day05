@@ -1,40 +1,55 @@
-# PHÂN TÍCH UX AI CHATBOT - VIETNAM AIRLINES (NEO)
+# UX EXERCISE — VIETNAM AIRLINES (CHATBOT NEO)
 
-## PHẦN 1 — KHÁM PHÁ (EXPLORE)
-* **Marketing hứa hẹn:** Trợ lý ảo AI thông minh, hỗ trợ 24/7, cá nhân hóa hành trình, giải quyết thủ tục nhanh chóng.
-* **Thực tế trải nghiệm:** * Giao diện Card/Thẻ thông tin trực quan.
-    * Phản ứng nhanh với các từ khóa tra cứu (FAQ).
-    * **Vấn đề:** Chưa thực sự "thông minh" trong việc hiểu ý định thay đổi đột ngột; giao diện không đổi khi gặp lỗi.
+## Sản phẩm: Vietnam Airlines — Chatbot NEO (Trợ lý ảo hỗ trợ hành khách)
+
+## 4 PATHS
+
+### 1. AI đúng
+- User hỏi về quy định mang "Mắm tôm" hoặc "Làm thủ tục trực tuyến".
+- AI hiển thị thẻ thông tin (Card) chi tiết: quy định đóng gói, link check-in trực tiếp.
+- UI: Hiện thông tin chính xác, có nút bấm (button) để user đi tiếp tới website.
+
+### 2. AI không chắc
+- User gõ câu chào xã giao hoặc từ khóa ngắn như "Em ơi", "Thủ tục".
+- UI: AI trả lời xã giao ("NEO rất vui được hỗ trợ...") nhưng không đưa ra menu gợi ý ngay.
+- Vấn đề: Thiếu cơ chế hỏi lại hoặc Show alternatives (ví dụ: "Bạn muốn làm thủ tục tại sân bay hay trực tuyến?").
+
+### 3. AI sai
+- User đang hỏi về mắm tôm, sau đó đổi ý gõ: "Muốn gặp người thật".
+- AI bị kẹt ngữ cảnh cũ, tiếp tục trả lời về mắm tôm hoặc phản hồi sai chính tả (**"abnj"**).
+- Sửa: User phải gõ lại từ khóa mới hoặc nhấn "Bắt đầu lại" -> 2-3 bước.
+- Vấn đề: AI không nhận diện được sự thay đổi ý định (Intent shift) và dữ liệu hiển thị còn rác (Typo).
+
+### 4. User mất niềm tin
+- Khi gặp lỗi kẹt ngữ cảnh hoặc sai chính tả, user cảm thấy bot "ngáo" và không muốn dùng tiếp.
+- Không có nút "Thoát nhanh" (Exit) rõ ràng ngay tại tin nhắn lỗi.
+- Fallback (Hotline) nằm ở cuối đoạn text dài, khó tìm khi đang ức chế.
+
+---
+
+## Path yếu nhất: Path 3 + 4
+- Khả năng xử lý lỗi (Recovery flow) rất kém: AI bị "lì" trong ngữ cảnh cũ.
+- Thiếu cơ chế nhận diện "Escape Intent": Khi user muốn gặp người, AI vẫn cố trả lời bằng máy.
+- Lỗi hiển thị (chính tả) làm giảm uy tín của một hãng hàng không quốc gia.
 
 ---
 
-## PHẦN 2 — PHÂN TÍCH 4 PATHS (FRAMEWORK)
-
-| Path | Câu hỏi & Phân tích thực tế |
-| :--- | :--- |
-| **1. Khi AI đúng** | **Thấy:** Text chi tiết + Thẻ Card + Link điều hướng. <br> **Confirm:** Nhắc lại đúng keyword (Vd: "Mắm tôm", "20/5"). |
-| **2. Khi AI không chắc** | **Xử lý:** Trả lời xã giao ("Chào bạn"). <br> **Vấn đề:** Thiếu "Show alternatives" (Gợi ý menu chức năng) để user chọn lại. |
-| **3. Khi AI sai** | **Dấu hiệu:** AI trả lời lạc đề, lỗi chính tả (**"abnj"**). <br> **Sửa:** User phải xóa/gõ lại. **Mất 3 bước** để thoát context cũ. |
-| **4. Khi user mất tin** | **Exit:** Nút thoát ẩn/khó tìm. <br> **Fallback:** AI không nhận diện được lệnh "Gặp người thật" khi đang kẹt luồng cũ. |
-
-### **Tự phân tích (Insights)**
-* **Path xử lý tốt nhất:** **Path 1** (Tra cứu FAQ tĩnh). Hệ thống có cơ sở dữ liệu quy định bay rất sâu và chính xác.
-* **Path yếu nhất:** **Path 3 & 4**. AI bị "lì", không có khả năng tự sửa lỗi (Self-correction) và không nhận diện được ý định thoát (Escape Intent).
-* **Gap Marketing vs Thực tế:** Marketing định vị "AI", thực tế là **Keyword-Bot**. Khoảng cách nằm ở khả năng nhận diện cảm xúc (Sentiment) và sự kết nối tức thời với con người.
+## Gap marketing vs thực tế
+- Marketing: "Trợ lý ảo thông minh", "Cá nhân hóa trải nghiệm", "Hỗ trợ tức thì".
+- Thực tế: Hoạt động như một bộ FAQ Search (tìm kiếm câu hỏi thường gặp) dựa trên từ khóa. 
+- Gap lớn nhất: Khả năng **Human hand-off** (chuyển giao sang người thật) không mượt mà như quảng cáo.
 
 ---
 
-## PHẦN 3 — SKETCH "LÀM TỐT HƠN" (PATH 4 - ESCAPE PATH)
+## Sketch (Hướng dẫn vẽ lên A4)
 
-### 1. As-is (Hiện tại)
-* **Luồng:** User ức chế gõ "Gặp người thật" -> AI trả lời quy định mắm tôm (Lỗi kẹt ngữ cảnh) -> User bế tắc.
-* **Điểm gãy:** Không nhận diện được yêu cầu kết nối con người; lặp lại dữ liệu rác/lỗi chính tả ("abnj").
+**As-is (Bên trái):**
+- Vẽ khung chat: User đòi "Gặp người thật" -> AI trả lời "Quy định mắm tôm... abnj".
+- Khoanh đỏ vào câu trả lời AI. Ghi chú: **"Kẹt ngữ cảnh & Lỗi Typo"**.
+- User Journey gãy tại đây vì không có lối thoát.
 
-### 2. To-be (Đề xuất)
-* **Luồng:** User yêu cầu gặp người thật -> AI nhận diện Intent "Thoát" -> Ngắt luồng FAQ cũ -> Hiển thị nút hỗ trợ trực tiếp.
-* **Thêm:** Nút bấm **[Kết nối nhân viên ngay]**.
-* **Bớt:** Các câu trả lời FAQ dài dòng khi user đang cần hỗ trợ khẩn cấp.
-* **Đổi:** Chuyển từ ưu tiên "Khớp từ khóa" sang "Nhận diện ý định thoát".
-
----
-*Người thực hiện: Nguyễn Thanh Bình - 2A202600484*
+**To-be (Bên phải):**
+- Vẽ khung chat: User đòi "Gặp người thật".
+- AI nhận diện Intent "Thoát" -> Hiện thông báo: "Tôi thấy bạn cần hỗ trợ trực tiếp từ nhân viên".
+- UI: Xuất hiện nút bấm nổi bật **[KẾT NỐI TƯ VẤN VIÊN]**.
+- Ghi rõ: **Thêm** nút Escape, **Đổi** cơ chế ưu tiên nhận diện Intent thay vì Keyword.
